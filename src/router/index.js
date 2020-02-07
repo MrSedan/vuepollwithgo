@@ -24,16 +24,16 @@ const routes = [
     name: 'poll',
     component: ()=> import('../views/Poll.vue')
   },
-  /*{
+  {
     path: '/*',
     name: 'notfound',
     component: ()=> import('../views/NotFound.vue')
-  }*/
+  }
 ]
 
 const router = new VueRouter({
   routes: routes,
-  //mode: 'history'
+  mode: 'history'
 })
 
 export default router

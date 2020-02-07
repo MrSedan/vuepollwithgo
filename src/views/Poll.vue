@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         formatDate: function(data){
-            let date = new Date(data*1000)
+            let date = new Date(data)
             let formatedDate = date.getHours() +":"+ ("0"+date.getMinutes()).substr(-2)+":"+("0"+date.getSeconds()).substr(-2)+" "+("0"+date.getDate()).substr(-2)+"."+("0"+(date.getMonth()+1)).substr(-2)+"."+date.getFullYear();
             return formatedDate
         },
@@ -78,11 +78,11 @@ export default {
             })
         }
     },
-    created: function(){
+    mounted: function(){
+        this.da = [];
         this.loadData();
     }
 }
-
 </script>
 
 <style lang="scss" scoped>
