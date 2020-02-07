@@ -3,8 +3,8 @@
     <div class="container">
     <div id="myChat">
         <h1>Send Message</h1>
-        <input type="tex" placeholder="Text" name="text" id="name" v-model="message">
-        <button id="send" @click="subForm()"><font-awesome-icon icon="paper-plane" /></button>
+        <input type="tex" placeholder="Text" name="text" id="name" v-model="message" @keypress.13="enterMsg">
+        <button id="send" @click="subForm()" type="submit"><font-awesome-icon icon="paper-plane" /></button>
     </div>
     </div>
 
@@ -20,7 +20,6 @@
 import Vue from 'vue'
 import $ from 'jquery'
 import axios from 'axios'
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 export default {
     name: "Chat",
     data() {
@@ -28,10 +27,16 @@ export default {
             da: [],
             message: "",
             timeout: 10,
-            yourActionsSinceTime : (new Date(Date.now() - 120000)).getTime()
+            yourActionsSinceTime : (new Date(Date.now() - 172800000)).getTime()
         }
     },
     methods: {
+        enterMsg: function(event){
+            if (event.which === 13){
+                this.subForm()
+            }
+            
+        },
         formatDate: function(data){
             let date = new Date(data)
             let formatedDate = date.getHours() +":"+ ("0"+date.getMinutes()).substr(-2)+":"+("0"+date.getSeconds()).substr(-2)+" "+("0"+date.getDate()).substr(-2)+"."+("0"+(date.getMonth()+1)).substr(-2)+"."+date.getFullYear();

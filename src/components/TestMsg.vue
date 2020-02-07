@@ -32,7 +32,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.test{
+  text-align: center;
+}
 li{
   list-style: none;
   display: inline-block;
