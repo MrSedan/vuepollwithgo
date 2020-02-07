@@ -3,7 +3,8 @@
     <div class="container">
     <div id="myChat">
         <h1>Send Message</h1>
-        <input type="tex" placeholder="Text" name="text" id="name" v-model="message" @keypress.13="enterMsg">
+        <input type="tex" placeholder="Text" name="text" id="name" v-model="message" @keypress.13="enterMsg" maxlength="120">
+        <h5>{{message.length}}/120</h5>
         <button id="send" @click="subForm()" type="submit"><font-awesome-icon icon="paper-plane" /></button>
     </div>
     </div>
@@ -45,10 +46,12 @@ export default {
         subForm: function(){
             //let mes = JSON.stringify({text: this.message})
             //console.log(mes)
-            axios.post("/api/messages", {text: this.message})
+            if (!(this.message.length > 120 || this.message.length===0)){
+                axios.post("/api/messages", {text: this.message})
             .catch(e=>{
                 console.log(e)
             })
+            }
             this.message = ""
         },
         loadData: function(){
